@@ -116,144 +116,82 @@ export async function logout() {
 }
 
 
+export async function getPosts() {
+  try {
+    const posts = await prisma.posts.findMany()
+    console.log("ACTIONS")
+    console.log(posts)
+    return posts;
+  } catch (error) {
+    // console.log(error);  
+    return null;
+  }
+}
+
+export async function newPost(formData) {
+  try {
+    const author = formData.get('author');
+    const title = formData.get('title');
+    const image = formData.get('image');
+    const post = formData.get('post');
+    const created = formData.get('created');
+    const modified = formData.get('modified');
+    const is_draft = formData.get('is_draft');
+    const slug = formData.get('slug');
+    const views = formData.get('views');
+
+    const posts = await prisma.posts.create({
+      data: { author, title, image, post, created, modified, is_draft, slug, views  },
+    })
+
+    console.log(posts);
+    revalidatePath('/posts')
+  } catch (error) {
+    console.log(error);
+  }
+  redirect('/posts');
+}
 
 
+export async function editPost(formData) {
+  const id = Number( formData.get('id') )
+  const author = formData.get('author');
+  const title = formData.get('title');
+  const image = formData.get('image');
+  const post = formData.get('post');
+  const created = formData.get('created');
+  const modified = formData.get('modified');
+  const is_draft = formData.get('is_draft');
+  const slug = formData.get('slug');
+  const views = formData.get('views');
 
+  try {
+    const posts = await prisma.posts.update({
+      where: { id },
+      data: {  author, title, image, post, created, modified, is_draft, slug, views },
+    })
+    console.log(posts);
+    revalidatePath('/posts')
+  } catch (error) {
+    console.log(error);
+  }
+  redirect('/posts');
+}
 
-
-
-
-export async function getClientes() {
-    try {
-      const clientes = await prisma.cliente.findMany()
-      return clientes;
-    } catch (error) {
-      // console.log(error);  
-      return null;
-    }
-  }
+export async function deletePost(formData) {
+  try {
+    const id = Number(formData.get('id'))
   
-  export async function newCliente(formData) {
-    try {
-      const nombre = formData.get('nombre')
-      const direccion = formData.get('direccion')
-  
-      const cliente = await prisma.cliente.create({
-        data: { nombre, direccion  },
-      })
-  
-      console.log(cliente);
-      revalidatePath('/clientes')
-    } catch (error) {
-      console.log(error);
-    }
-    redirect('/clientes');
-  }
-  
-  
-  export async function editCliente(formData) {
-    const id = Number( formData.get('id') )
-    const nombre = formData.get('nombre')
-    const direccion = formData.get('direccion')
-  
-    try {
-      const cliente = await prisma.cliente.update({
-        where: { id },
-        data: {  nombre, direccion },
-      })
-      console.log(cliente);
-      revalidatePath('/clientes')
-    } catch (error) {
-      console.log(error);
-    }
-    redirect('/clientes');
-  }
-  
-  export async function deleteCliente(formData) {
-    try {
-      const id = Number(formData.get('id'))
-    
-      const cliente = await prisma.cliente.delete({
-        where: {
-          id: id,
-        },
-      })
-      console.log(cliente);
-      revalidatePath('/clientes')
-    } catch (error) {
-      console.log(error);
-    }
-  
-    redirect('/clientes');
-  }
-  
-  
-  
-  
-  
-  export async function getBicicletas() {
-    try {
-      const bicicletas = await prisma.bicicleta.findMany()
-      return bicicletas;
-    } catch (error) {
-      console.log(error);  
-      return null;
-    }
-  }
-  
-  export async function newBicicleta(formData) {
-    try {
-      const clienteId = Number(formData.get('clienteId'))
-      const modelo = formData.get('modelo')
-      const precio = Number(formData.get('precio'))
-  
-      console.log(precio);
-      const bicicleta = await prisma.bicicleta.create({
-        data: { modelo, precio, clienteId  },
-      })
-  
-      console.log(bicicleta);
-      revalidatePath('/bicicletas')
-    } catch (error) {
-      console.log(error);
-    }
-    redirect('/bicicletas');
+    const posts = await prisma.posts.delete({
+      where: {
+        id: id,
+      },
+    })
+    console.log(posts);
+    revalidatePath('/posts')
+  } catch (error) {
+    console.log(error);
   }
 
-  
-  export async function editBicicleta(formData) {
-    const id = Number( formData.get('id') )
-    const clienteId = Number( formData.get('clienteId') )
-    const modelo = formData.get('modelo')
-    const precio = Number(formData.get('precio'))
-  
-    try {
-      const bicicleta = await prisma.bicicleta.update({
-        where: { id },
-        data: {  modelo, precio, clienteId },
-      })
-      console.log(bicicleta);
-      revalidatePath('/bicicletas')
-    } catch (error) {
-      console.log(error);
-    }
-    redirect('/bicicletas');
-  }
-  
-  export async function deleteBicicleta(formData) {
-    try {
-      const id = Number(formData.get('id'))
-  
-      const bicicleta = await prisma.bicicleta.delete({
-        where: {
-          id: id,
-        },
-      })
-      console.log(bicicleta);
-      revalidatePath('/bicicletas')
-    } catch (error) {
-      console.log(error);
-    }
-  
-    redirect('/bicicletas');
-  }
+  redirect('/posts');
+}

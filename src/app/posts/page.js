@@ -22,9 +22,20 @@ export default async function Home() {
                     ))}
                 </div>
             )} */}
-             <div>
+            <div>
+                    <Link className='enlace' href="/posts/new"> Nuevo post </Link>
                     {posts.map((post) => (
                         <Post key={post.id} post={post} >
+                            <Link
+                               className='enlace'
+                            href={{ pathname: '/posts/edit', query: { id: post.id } }}>
+                            Editar post
+                        </Link>
+                                <Link
+                                   className='enlace'
+                                href={{ pathname: '/posts/delete', query: { id: post.id } }}>
+                                Eliminar post
+                                </Link>
                         </Post>
                     ))}
                 </div>

@@ -14,31 +14,31 @@ function Form({ action, title, post, disabled }) {
                     placeholder='title'
                     defaultValue={post?.title} />
                 <label htmlFor='image'>image</label>
-                <input type='number' id='image' name='image' min='0' step={0.01}
+                <input type='text' id='image' name='image' min='0' step={0.01}
                     placeholder='image'
                     defaultValue={post?.image} />
                 <label htmlFor='post'>post</label>
-                <input type='number' id='post' name='post' min='0' step={0.01}
+                <input type='text' id='post' name='post' min='0' step={0.01}
                     placeholder='post'
                     defaultValue={post?.post} />
-                <label htmlFor='created'>created</label>
-                <input type='number' id='created' name='created' min='0' step={0.01}
+                {/* <label htmlFor='created'>created</label>
+                <input type='text' id='created' name='created' min='0' step={0.01}
                     placeholder='created'
                     defaultValue={post?.created} />
                 <label htmlFor='modified'>modified</label>
-                <input type='number' id='modified' name='modified' min='0' step={0.01}
+                <input type='text' id='modified' name='modified' min='0' step={0.01}
                     placeholder='modified'
                     defaultValue={post?.modified} />
                 <label htmlFor='is_draft'>is_draft</label>
-                <input type='number' id='is_draft' name='is_draft' min='0' step={0.01}
+                <input type='text' id='is_draft' name='is_draft' min='0' step={0.01}
                     placeholder='is_draft'
-                    defaultValue={post?.is_draft} />
+                    defaultValue={post?.is_draft} /> */}
                     <label htmlFor='slug'>slug</label>
-                <input type='number' id='slug' name='slug' min='0' step={0.01}
+                <input type='text' id='slug' name='slug' min='0' step={0.01}
                     placeholder='slug'
                     defaultValue={post?.slug} />
                     <label htmlFor='views'>views</label>
-                <input type='number' id='views' name='views' min='0' step={0.01}
+                <input type='Integer' id='views' name='views' min='0' step={0.01}
                     placeholder='views'
                     defaultValue={post?.views} />
             </fieldset>

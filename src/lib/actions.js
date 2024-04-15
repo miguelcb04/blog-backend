@@ -134,17 +134,15 @@ export async function newPost(formData) {
     const title = formData.get('title');
     const image = formData.get('image');
     const post = formData.get('post');
-    const created = formData.get('created');
-    const modified = formData.get('modified');
-    const is_draft = formData.get('is_draft');
     const slug = formData.get('slug');
-    const views = formData.get('views');
+    const views = Number(formData.get('views'));
 
     const posts = await prisma.posts.create({
-      data: { author, title, image, post, created, modified, is_draft, slug, views  },
+      data: { author, title, image, post, slug, views  },
     })
 
     console.log(posts);
+    console.log("hola")
     revalidatePath('/posts')
   } catch (error) {
     console.log(error);
@@ -159,16 +157,16 @@ export async function editPost(formData) {
   const title = formData.get('title');
   const image = formData.get('image');
   const post = formData.get('post');
-  const created = formData.get('created');
-  const modified = formData.get('modified');
-  const is_draft = formData.get('is_draft');
+  // const created = formData.get('created');
+  // const modified = formData.get('modified');
+  // const is_draft = formData.get('is_draft');
   const slug = formData.get('slug');
-  const views = formData.get('views');
+  const views = Number(formData.get('views'));
 
   try {
     const posts = await prisma.posts.update({
       where: { id },
-      data: {  author, title, image, post, created, modified, is_draft, slug, views },
+      data: {  author, title, image, post, slug, views },
     })
     console.log(posts);
     revalidatePath('/posts')

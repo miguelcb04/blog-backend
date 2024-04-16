@@ -193,3 +193,71 @@ export async function deletePost(formData) {
 
   redirect('/posts');
 }
+
+export async function getCategorys() {
+  try {
+    const categorys = await prisma.category.findMany()
+    console.log("ACTIONS")
+    console.log(categorys)
+    return categorys;
+  } catch (error) {
+    // console.log(error);  
+    return null;
+  }
+}
+
+export async function newCategory(formData) {
+  try {
+    const name = formData.get('name');
+    const slug = formData.get('slug');
+  
+
+    const categorys = await prisma.category.create({
+      data: { name, slug},
+    })
+
+    console.log(categorys);
+    console.log("hola")
+    revalidatePath('/categorys')
+  } catch (error) {
+    console.log(error);
+  }
+  redirect('/categorys');
+}
+
+
+export async function editCategory(formData) {
+  const id = Number( formData.get('id') )
+  const name = formData.get('name');
+  const slug = formData.get('slug');
+
+  try {
+    const categorys = await prisma.category.update({
+      where: { id },
+      data: {  name, slug},
+    })
+    console.log(categorys);
+    revalidatePath('/categorys')
+  } catch (error) {
+    console.log(error);
+  }
+  redirect('/categorys');
+}
+
+export async function deleteCategory(formData) {
+  try {
+    const id = Number(formData.get('id'))
+  
+    const categorys = await prisma.category.delete({
+      where: {
+        id: id,
+      },
+    })
+    console.log(categorys);
+    revalidatePath('/categorys')
+  } catch (error) {
+    console.log(error);
+  }
+
+  redirect('/categorys');
+}

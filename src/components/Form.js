@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+import ListaCategory from './ListaCategory';
 
 function Form({ action, title, post, disabled }) {
 
@@ -21,26 +23,17 @@ function Form({ action, title, post, disabled }) {
                 <input type='text' id='post' name='post' min='0' step={0.01}
                     placeholder='post'
                     defaultValue={post?.post} />
-                {/* <label htmlFor='created'>created</label>
-                <input type='text' id='created' name='created' min='0' step={0.01}
-                    placeholder='created'
-                    defaultValue={post?.created} />
-                <label htmlFor='modified'>modified</label>
-                <input type='text' id='modified' name='modified' min='0' step={0.01}
-                    placeholder='modified'
-                    defaultValue={post?.modified} />
-                <label htmlFor='is_draft'>is_draft</label>
-                <input type='text' id='is_draft' name='is_draft' min='0' step={0.01}
-                    placeholder='is_draft'
-                    defaultValue={post?.is_draft} /> */}
                     <label htmlFor='slug'>slug</label>
                 <input type='text' id='slug' name='slug' min='0' step={0.01}
                     placeholder='slug'
                     defaultValue={post?.slug} />
                     <label htmlFor='views'>views</label>
-                <input type='Integer' id='views' name='views' min='0' step={0.01}
+                <input type='number' id='views' name='views' min='0' step={0.01}
                     placeholder='views'
                     defaultValue={post?.views} />
+                <Suspense fallback={'Loading ...'}>
+                    <ListaCategory postId={post?.id} disabled={disabled} />
+                </Suspense>
             </fieldset>
             <button type='submit'>{title}</button>
         </form>

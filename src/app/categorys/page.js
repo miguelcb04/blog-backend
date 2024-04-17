@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { auth } from "@/auth"
-import Category from '@/components/categorys'
+import Category from '@/components/Categorys'
 import { getCategorys} from '@/lib/actions'
 
 export const dynamic = 'force-dynamic'

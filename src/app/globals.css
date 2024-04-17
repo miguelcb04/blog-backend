@@ -14,9 +14,9 @@
 
 html,
 body {
-  max-width: 100vw;
+  /* max-width: 100vw;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: hidden; */
 }
 
 header {
@@ -87,7 +87,7 @@ section.auth {
 
 
 div.form {
-  height: calc( 100vh - var(--header-height) );
+  /* height: calc( 100vh - var(--header-height) ); */
   display: grid;
   place-content: center;
 }
@@ -112,7 +112,7 @@ form.credentials div {
   gap: 10px;
 }
 
-form input {
+form input[type=text] {
   width: 100%;
   padding: 10px;
 }
@@ -129,6 +129,13 @@ form button {
 form button:hover {
   background-color: white;
   outline: solid 1px gray;
+}
+
+
+fieldset{
+  text-align: left;
+  padding-block: 20px;
+
 }
 
 nav button {

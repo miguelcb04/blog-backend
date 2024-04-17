@@ -1,49 +1,34 @@
-import { getPosts, getCategorys } from '@/lib/actions';
+import { getPost, getCategorys } from '@/lib/actions';
 
-function ListaCategory({ postId, disabled }) {
+async function ListaCategory({ postId, disabled }) {
+
     // Variables para almacenar la categoría seleccionada y las categorías
-    let selectedCategoryId = null;
-    let categorys = [];
+    const categorys = await getCategorys();
+   
+    let post = null;
+    let selectedCategorys =[];
 
-    // Función para obtener las categorías
-    const fetchCategorys = async () => {
-        categorys = await getCategorys();
-    };
-
-    // Función para obtener el post y su categoría asociada
-    const fetchPostAndCategory = async () => {
-        if (postId) {
-            const post = await getPosts(postId);
-            selectedCategoryId = post.categoryId;
-        }
-    };
-
-    // Ejecutar la lógica de carga de datos solo en el cliente
-    if (typeof window !== 'undefined') {
-        fetchCategorys();
-        fetchPostAndCategory();
+    if (postId) {
+        post = await getPost(postId)
+        selectedCategorys = post.categories.map(cat => cat.id);
     }
+  console.log("select categorias" ,selectedCategorys)
 
-    console.log("hola");
-
+    console.log("categorias " , categorys);
     return (
-        <option disabled={disabled}>
-            <legend>Categorias</legend>
+        <fieldset disabled={disabled}>
+            <legend><h1>Categorias</h1></legend>
             {categorys.map((category) => (
                 <div key={category.id}>
                     <p>
-                        <input
-                            type='radio'
-                            name='categoryId'
-                            value={category.id}
-                            checked={selectedCategoryId === category.id}
-                            onChange={() => { }}
-                        />
-                        {category.name}
+                    {selectedCategorys.includes(category.id) 
+                    ? <input type='checkbox' name={category.id}  value={category.id} defaultChecked />
+                    : <input type='checkbox' name={category.id}  value={category.id} /> }
+                    {category.name}
                     </p>
                 </div>
             ))}
-        </option>
+        </fieldset>
     );
 }
 

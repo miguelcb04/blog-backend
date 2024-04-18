@@ -22,7 +22,7 @@ export default async function Home() {
                     ))}
                 </div>
             )} */}
-            <div>
+            {/* <div>
                     <Link className='enlace' href="/categorys/new"> Nueva categoria </Link>
                     {category.map((category) => (
                         <Category key={category.id} category={category} >
@@ -38,12 +38,12 @@ export default async function Home() {
                                 </Link>
                         </Category>
                     ))}
-                </div>
+                </div> */}
             {/* Muestra los enlaces solo si el usuario es un administrador */}
             {session?.user?.role === 'ADMIN' && (
                 <div>
                 <Link className='enlace' href="/categorys/new"> Nueva categoria </Link>
-                {categorys.map((category) => (
+                {category.map((category) => (
                     <Category key={category.id} category={category} >
                         <Link
                            className='enlace'

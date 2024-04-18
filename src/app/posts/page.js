@@ -22,7 +22,7 @@ export default async function Home() {
                     ))}
                 </div>
             )} */}
-            <div>
+            {/* <div>
                     <Link className='enlace' href="/posts/new"> Nuevo post </Link>
                     {posts.map((post) => (
                         <Post key={post.id} post={post} >
@@ -38,7 +38,7 @@ export default async function Home() {
                                 </Link>
                         </Post>
                     ))}
-                </div>
+                </div> */}
             {/* Muestra los enlaces solo si el usuario es un administrador */}
             {session?.user?.role === 'ADMIN' && (
                 <div>

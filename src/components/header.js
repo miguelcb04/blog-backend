@@ -12,13 +12,13 @@ async function Header() {
             <Link href="/" className="text-lg font-bold text-white hover:text-gray-100">
                 Inicio
             </Link>
-            {session?.user?.role === 'ADMIN' && (
+            {/* {session?.user?.role === 'ADMIN' && (
                 <Link href="/admin" className="text-lg font-bold text-white hover:text-gray-100">Panel de Administrador
                 </Link>
-            )}
-            <Link href="/dashboard" className="text-lg font-bold text-white hover:text-gray-100">
+            )} */}
+            {/* <Link href="/dashboard" className="text-lg font-bold text-white hover:text-gray-100">
                 Cuenta
-            </Link>
+            </Link> */}
         </div>
         <div className="flex items-center space-x-4">
             {session ? (

@@ -5,6 +5,7 @@ function post({ children, post }) {
         <div style={{ 'border': '1px solid lightgrey', 'padding': '50px' }}>
             <p><strong>{post.author}</strong></p>
             <p><strong>{post.title}</strong></p>
+            <p><strong>{new Date(post.created).toLocaleString()}</strong></p>
             {/* <p dangerouslySetInnerHTML={{__html: post.post}}/> */}
             
             {children}

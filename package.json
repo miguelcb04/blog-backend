@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "node ./prisma/seed.mjs",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "consultas": "node  --watch ./consultas.mjs "
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.4.0",
@@ -20,9 +21,12 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
     "prisma": "^5.10.2",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

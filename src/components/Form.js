@@ -20,9 +20,11 @@ function Form({ action, title, post, disabled }) {
                     placeholder='image'
                     defaultValue={post?.image} />
                 <label htmlFor='post'>post</label>
-                <input type='text' id='post' name='post' min='0' step={0.01}
+                <br/>
+                <textarea id='post' name='post' rows="5" cols="33"
                     placeholder='post'
                     defaultValue={post?.post} />
+                    <br/>
                     <label htmlFor='slug'>slug</label>
                 <input type='text' id='slug' name='slug' min='0' step={0.01}
                     placeholder='slug'

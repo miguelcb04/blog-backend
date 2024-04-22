@@ -8,14 +8,14 @@ const posts = [
         image: "intro_ai.jpg",
         post: "<h1>AI is shaping our future.</h1><p>Let's explore its basics.</p>",
         slug:"introduction-to-aiI",
-        views: 150,
+        views: 1500,
     }
 ];
 
 const categorys = [
     {
-        name: "Technology",
-        slug: "technology",
+        name: "Technologys",
+        slug: "technologys",
     }
 ];
 
@@ -26,16 +26,16 @@ const prisma = new PrismaClient();
 
 const load = async () => {
     try {
-        await prisma.post.deleteMany({});
+        await prisma.posts.deleteMany({});
         console.log('Borrados los registros de la tabla posts');
 
         // await prisma.$queryRaw`ALTER SEQUENCE posts_id_seq RESTART WITH 1`;
         // console.log('reset post sequence to 1');
 
-        await prisma.post.createMany({
+        await prisma.posts.createMany({
             data: posts,
         });
-        console.log('Añadidos datos a tabla articulos');
+        console.log('Añadidos datos a tabla post');
 
         await prisma.category.deleteMany({});
         console.log('Borrados los registros de la tabla category');

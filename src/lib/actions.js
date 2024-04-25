@@ -125,7 +125,26 @@ async function getCategoryIds() {
   return CategoryIds.map(category => category.id)
 }
 
+export async function getPostsWithCategory(categoryName) {
+  try {
+    const posts = await prisma.posts.findMany({
+      include: { categories: true },
+    })
 
+    let filteredPosts = posts
+    // const filteredPosts = posts.filter( post => post.categories.filter( cat => cat.name.localeCompare(categoryName)==0  ).length != 0 )
+    if (categoryName) {
+      filteredPosts = posts.filter(post => post.categories.filter(cat => cat.name == categoryName).length != 0)
+    } 
+
+
+    console.log('FILTERED POSTS', filteredPosts)
+    return filteredPosts;
+  } catch (error) {
+    // console.log(error);  
+    return null;
+  }
+}
 
 export async function getPosts() {
   try {
@@ -173,7 +192,7 @@ export async function newPost(formData) {
     const connect = check.map(id => { return { id: Number(id) } })
 
     const posts = await prisma.posts.create({
-      data: { author, title, image, post, slug, views , categories: { connect } },
+      data: { author, title, image, post, slug, views, categories: { connect } },
       include: { categories: true }
     })
 

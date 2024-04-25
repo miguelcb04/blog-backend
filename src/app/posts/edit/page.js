@@ -23,12 +23,10 @@ async function page({ searchParams }) {
   }
 
   return (
-<div className="flex justify-center items-center ">
-  <div className="bg-white p-8 rounded-lg shadow-md text-blue-500 max-w-md w-full">
-    <h3 className="text-2xl font-bold mb-4 text-center">Editar post {searchParams.id}</h3>
+  <div>
+    <h3 className=" font-bold mb-4 text-center">Editar post {searchParams.id}</h3>
     <Form action={editPost} title="Editar post" post={post} />
   </div>
-</div>
 
   );
 }

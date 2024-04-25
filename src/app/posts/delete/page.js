@@ -13,7 +13,7 @@ async function page({ searchParams }) {
 
   return (
     <div>
-      <h3 className="text-center">Eliminar post {searchParams.id}</h3>
+      <h3 className="font-bold text-center">Eliminar post {searchParams.id}</h3>
       <Form action={deletePost} title='Eliminar post' post={post} disabled={true} />
     </div>
   )

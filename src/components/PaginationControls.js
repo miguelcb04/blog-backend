@@ -1,9 +1,9 @@
 'use client'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { PAGE, PER_PAGE } from '@/app/api/pagination'
+import { PAGE, PER_PAGE } from '@/lib/pagination'
 
 
-function PaginationControls ({hasNextPage,  hasPrevPage}) {
+function PaginationControls ({hasNextPage,  hasPrevPage, total}) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -16,20 +16,20 @@ function PaginationControls ({hasNextPage,  hasPrevPage}) {
         className='bg-blue-500 text-white p-1'
         disabled={!hasPrevPage}
         onClick={() => {
-          router.push(`/?page=${page - 1}&per_page=${per_page}`)
+          router.push(`/posts/?page=${page - 1}&per_page=${per_page}`)
         }}>
         prev page
       </button>
 
       <div>
-        {page} / {Math.ceil(10 / per_page)}
+        {page} / {Math.ceil(total / per_page)}
       </div>
 
       <button
         className='bg-blue-500 text-white p-1'
         disabled={!hasNextPage}
         onClick={() => {
-          router.push(`/?page=${page + 1}&per_page=${per_page}`)
+          router.push(`/posts/?page=${page + 1}&per_page=${per_page}`)
         }}>
         next page
       </button>

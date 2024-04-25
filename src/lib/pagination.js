@@ -1,2 +1,2 @@
-export const PAGE = 2
+export const PAGE = 1
 export const PER_PAGE = 3

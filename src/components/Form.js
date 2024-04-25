@@ -4,41 +4,61 @@ import ListaCategory from './ListaCategory';
 function Form({ action, title, post, disabled }) {
 
     return (
-        <form action={action} >
-            <input type='hidden' name='id' value={post?.id} />
-            <fieldset disabled={disabled}>
-                <label htmlFor='author'>author</label>
-                <input type='text' id='author' name='author'
-                    placeholder='author'
-                    defaultValue={post?.author} autoFocus ></input>
-                <label htmlFor='title'>title</label>
-                <input type='text' id='title' name='title'
-                    placeholder='title'
-                    defaultValue={post?.title} />
-                <label htmlFor='image'>image</label>
-                <input type='text' id='image' name='image' min='0' step={0.01}
-                    placeholder='image'
-                    defaultValue={post?.image} />
-                <label htmlFor='post'>post</label>
-                <br/>
-                <textarea id='post' name='post' rows="5" cols="33"
-                    placeholder='post'
-                    defaultValue={post?.post} />
-                    <br/>
-                    <label htmlFor='slug'>slug</label>
-                <input type='text' id='slug' name='slug' min='0' step={0.01}
-                    placeholder='slug'
-                    defaultValue={post?.slug} />
-                    <label htmlFor='views'>views</label>
-                <input type='number' id='views' name='views' min='0' step={0.01}
-                    placeholder='views'
-                    defaultValue={post?.views} />
-                <Suspense fallback={'Loading ...'}>
-                    <ListaCategory postId={post?.id} disabled={disabled} />
-                </Suspense>
-            </fieldset>
-            <button type='submit'>{title}</button>
-        </form>
+<form action={action} className="w-full max-w-sm">
+  <input type='hidden' name='id' value={post?.id} />
+  <fieldset disabled={disabled} className="space-y-4">
+    <div className="flex items-center space-x-4">
+      <label htmlFor='author' className="w-1/4">Author</label>
+      <input type='text' id='author' name='author'
+        placeholder='Author'
+        defaultValue={post?.author}
+        className="w-3/4 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400 bg-gray-100"
+        autoFocus
+      />
+    </div>
+    <div className="flex items-center space-x-4">
+      <label htmlFor='title' className="w-1/4">Title</label>
+      <input type='text' id='title' name='title'
+        placeholder='Title'
+        defaultValue={post?.title}
+        className="w-3/4 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400 bg-gray-100"
+      />
+    </div>
+    {/* Agrega el resto de los campos con el mismo estilo */}
+    <div className="flex items-center space-x-4">
+      <label htmlFor='image' className="w-1/4">Image</label>
+      <input type='text' id='image' name='image'
+        placeholder='Image'
+        defaultValue={post?.image}
+        className="w-3/4 px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400 bg-gray-100"
+      />
+    </div>
+    <label htmlFor='post'>Post</label>
+    <textarea id='post' name='post' rows="5" cols="33"
+      placeholder='Post'
+      defaultValue={post?.post}
+      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400 bg-gray-100"
+    />
+    <label htmlFor='slug'>Slug</label>
+    <input type='text' id='slug' name='slug'
+      placeholder='Slug'
+      defaultValue={post?.slug}
+      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400 bg-gray-100"
+    />
+    <label htmlFor='views'>Views</label>
+    <input type='number' id='views' name='views' min='0'
+      placeholder='Views'
+      defaultValue={post?.views}
+      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400 bg-gray-100"
+    />
+    <Suspense fallback={'Loading ...'}>
+      <ListaCategory postId={post?.id} disabled={disabled} />
+    </Suspense>
+  </fieldset>
+  <button type='submit' className="w-full bg-blue-500 text-white px-4 py-2 rounded-md mt-4">{title}</button>
+</form>
+
+
     )
 }
 

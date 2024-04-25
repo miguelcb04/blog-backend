@@ -1,7 +1,10 @@
-import { getPosts,newPostJson } from "@/lib/actions";
+import { getPosts, getPostsWithCategory,newPostJson } from "@/lib/actions";
 
-export async function GET() {
-  let posts = await getPosts();
+export async function GET( request) {
+  const category = request.nextUrl.searchParams.get("category")
+  
+  let posts = await getPostsWithCategory(category );
+  console.log('api', posts)
   return Response.json(posts)
 }
 

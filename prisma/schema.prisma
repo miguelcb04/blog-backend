@@ -1,79 +1,58 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//  provider  = "postgresql"
-//   url  	    = env("DATABASE_URL")
-//   directUrl = env("DIRECT_URL")
-// }
-
-// prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
-  // uncomment next line if you use Prisma <5.10
-  // directUrl = env("DATABASE_URL_UNPOOLED")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-//datasource db {
-// provider  = "mysql"
- // url  	    = env("DATABASE_URL")
-//}
-
 model User {
-  id            String  @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String
   email         String?   @unique
   password      String?
   emailVerified DateTime?
   image         String?
-  role          String?   @default("USER")  // o  ADMIN
+  role          String?   @default("USER")
   accounts      Account[]
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-
-// Definición de la tabla Cliente
 model Posts {
-  id        Int      @id @default(autoincrement())
-  author    String
-  title     String
-  image     String
-  post      String
-  created   DateTime @default(now())
-  modified  DateTime @default(now())
-  is_draft  Boolean  @default(true)
-  slug      String   @unique
-  views     Int      @default(0)
-  categories Category[]
+  id         Int        @id @default(autoincrement())
+  author     String
+  title      String
+  image      String
+  post       String
+  created    DateTime   @default(now())
+  modified   DateTime   @default(now()) @updatedAt
+  is_draft   Boolean    @default(true)
+  slug       String     @unique
+  views      Int        @default(0)
+  categories Category[] @relation("CategoryToPosts")
 }
 
-// categories.prisma
 model Category {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   slug  String  @unique
-  posts Posts[]
+  posts Posts[] @relation("CategoryToPosts")
 }

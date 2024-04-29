@@ -5,8 +5,6 @@ import { signIn, signOut } from '@/auth';
 import { getUserByEmail } from '@/lib/data';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import category from '@/components/Categorys';
-import post from '@/components/Posts';
 
 
 // REGISTER
@@ -68,45 +66,7 @@ export async function login(formData) {
 
 }
 
-// LOGIN google
-export async function loginGoogle() {
-  try {
-    await signIn('google', { redirectTo: globalThis.callbackUrl })
-  } catch (error) {
-    console.log(error);
-    throw error
-  }
-}
 
-// LOGIN github
-//globalThis.callbackUrl
-export async function loginGithub() {
-  try {
-    await signIn('github', { redirectTo: globalThis.callbackUrl })
-  } catch (error) {
-    console.log(error);
-    throw error
-  }
-}
-
-
-export async function loginSpotify() {
-  try {
-    await signIn('spotify', { redirectTo: globalThis.callbackUrl })
-  } catch (error) {
-    console.log(error);
-    throw error
-  }
-}
-
-export async function loginGitLab() {
-  try {
-    await signIn('gitlab', { redirectTo: globalThis.callbackUrl })
-  } catch (error) {
-    console.log(error);
-    throw error
-  }
-}
 
 
 // LOGOUT
@@ -166,7 +126,7 @@ export async function getPost(postId) {
       where: { id },
       include: { categories: true }
     })
-
+    console.log(post)
     return post;
   } catch (error) {
     // console.log(error);  

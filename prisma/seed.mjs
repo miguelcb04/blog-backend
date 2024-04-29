@@ -9,6 +9,7 @@ const posts = [
         post: "<h1>AI is shaping our future.</h1><p>Let's explore its basics.</p>",
         slug:"introduction-to-aiI",
         views: 1500,
+        categories:[{"id":15,"name":"Technologys","slug":"technologys"}],
     }
 ];
 

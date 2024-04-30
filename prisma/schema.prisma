@@ -56,3 +56,8 @@ model Category {
   slug  String  @unique
   posts Posts[] @relation("CategoryToPosts")
 }
+
+
+
+
+

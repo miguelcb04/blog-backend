@@ -6,19 +6,14 @@ async function Header() {
     const session = await auth();
 
     return (
-<nav className="py-4 bg-cover bg-center bg-gradient-to-r from-green-400 to-blue-500" style={{borderBottomLeftRadius: '2px', borderBottomRightRadius: '2px', borderBottom: '2px solid black', opacity: '0.8'}}>
+<nav className="py-4 bg-cover bg-center bg-blue-950" style={{borderBottomLeftRadius: '2px', borderBottomRightRadius: '2px', borderBottom: '2px solid black', opacity: '0.8'}}>
     <div className="container mx-auto flex justify-between items-center px-4">
         <div className="flex items-center space-x-4">
+        <img src='/logo-fs.svg' className="h-16 w-auto" alt="Logo" />
+        <div className="bg-white h-16 w-1"></div>
             <Link href="/" className="text-lg font-bold text-white hover:text-gray-100">
                 Inicio
             </Link>
-            {/* {session?.user?.role === 'ADMIN' && (
-                <Link href="/admin" className="text-lg font-bold text-white hover:text-gray-100">Panel de Administrador
-                </Link>
-            )} */}
-            {/* <Link href="/dashboard" className="text-lg font-bold text-white hover:text-gray-100">
-                Cuenta
-            </Link> */}
         </div>
         <div className="flex items-center space-x-4">
             {session ? (

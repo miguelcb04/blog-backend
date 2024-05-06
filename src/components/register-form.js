@@ -28,21 +28,22 @@ function RegisterForm() {
     }
     return (
         <form action={wrapper} className='credentials'>
-            <div>
-                <label>Nombre
-                    <input type='text' name='name' placeholder="José García" />
-                </label>
-                <label>Email
-                    <input type='email' name='email' placeholder="jose@mail.com" />
-                </label>
-                <label>Contraseña
-                    <input type="password" name='password' placeholder="******" />
-                </label>
-                <p className={`info ${tipo}`}> {resultado} </p>
-            </div>
+    <div>
+        <label>Nombre</label>
+        <input type='text' name='name' placeholder="José García" />
+    </div>
+    <div>
+        <label>Email</label>
+        <input type='email' name='email' placeholder="jose@mail.com" />
+    </div>
+    <div>
+        <label>Contraseña</label>
+        <input type="password" name='password' placeholder="******" />
+    </div>
+    <p className={`info ${tipo}`}> {resultado} </p>
+    <Button title="Crear cuenta" />
+</form>
 
-            <Button title="Crear cuenta" />
-        </form>
 
     );
 };

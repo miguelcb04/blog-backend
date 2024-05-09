@@ -19,16 +19,16 @@ async function Header() {
             {session ? (
                 <form action={logout}>
                     <button type="submit" className="inline-flex items-center px-4 py-2 bg-white text-gray-800 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">
-                        SignOut
+                        Desconectar
                     </button>
                 </form>
             ) : (
                 <div className="flex items-center space-x-4">
                     <Link href="/auth/register" className="text-lg font-bold text-white hover:text-gray-100">
-                        SignUp
+                    inscribirse
                     </Link>
                     <Link href="/auth/login" className="text-lg font-bold text-white hover:text-gray-100">
-                        SignIn
+                    iniciar sesión
                     </Link>
                 </div>
             )}

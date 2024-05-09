@@ -43,18 +43,18 @@ model Posts {
   image      String
   post       String
   created    DateTime   @default(now())
-  modified   DateTime   @default(now()) @updatedAt
+  modified   DateTime   @updatedAt
   is_draft   Boolean    @default(true)
   slug       String     @unique
   views      Int        @default(0)
-  categories Category[] @relation("CategoryToPosts")
+  categories Category[] //@relation("CategoryToPosts")
 }
 
 model Category {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   slug  String  @unique
-  posts Posts[] @relation("CategoryToPosts")
+  posts Posts[] // @relation("CategoryToPosts")
 }
 
 

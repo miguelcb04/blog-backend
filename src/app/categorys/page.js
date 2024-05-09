@@ -8,50 +8,21 @@ export const dynamic = 'force-dynamic'
 export default async function Home() {
     const category = await getCategorys()
     const session = await auth()
-
-    // console.log("Bicicletas:", bicicletas); // Registrar las bicicletas en la consola
-    // console.log("Sesión:", session); // Registrar la sesión en la consola
     
     return (
-        <div>
-            {/* {session?.user?.role === 'USER' && (
-                <div>
-                    {articulos.map((cliente) => (
-                        <Articulo key={cliente.id} cliente={cliente} >
-                        </Articulo>
-                    ))}
-                </div>
-            )} */}
-            {/* <div>
-                    <Link className='enlace' href="/categorys/new"> Nueva categoria </Link>
-                    {category.map((category) => (
-                        <Category key={category.id} category={category} >
-                            <Link
-                               className='enlace'
-                            href={{ pathname: '/categorys/edit', query: { id: category.id } }}>
-                            Editar categoria
-                        </Link>
-                                <Link
-                                   className='enlace'
-                                href={{ pathname: '/categorys/delete', query: { id: category.id } }}>
-                                Eliminar categoria
-                                </Link>
-                        </Category>
-                    ))}
-                </div> */}
-            {/* Muestra los enlaces solo si el usuario es un administrador */}
+        <div >
             {session?.user?.role === 'ADMIN' && (
-                <div>
-                <Link className='enlace' href="/categorys/new"> Nueva categoria </Link>
+                <div >
+                <Link className='bg-gray-300 px-4 rounded-md ' href="/categorys/new"> Nueva categoria </Link>
                 {category.map((category) => (
                     <Category key={category.id} category={category} >
                         <Link
-                           className='enlace'
+                           className='bg-gray-300  px-4 rounded-md mr-2'
                         href={{ pathname: '/categorys/edit', query: { id: category.id } }}>
                         Editar categoria
                     </Link>
-                            <Link
-                               className='enlace'
+                            <Link 
+                               className='bg-gray-300 px-4 rounded-md mr-2  mt-12'
                             href={{ pathname: '/categorys/delete', query: { id: category.id } }}>
                             Eliminar categoria
                             </Link>

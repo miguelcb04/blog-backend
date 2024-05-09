@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className='bg-cover bg-center bg-gray-400' >
+      <body className='bg-cover bg-center bg-white' >
         <Header/>
         {children}
       </body>

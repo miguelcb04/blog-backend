@@ -1,6 +1,7 @@
 import Form from "@/components/Form";
 import {prisma} from "@/lib/prisma";
 import { editPost } from "@/lib/actions";
+import TipTap from "@/components/TipTap";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,9 @@ async function page({ searchParams }) {
   return (
   <div>
     <h3 className=" font-bold mb-4 text-center">Editar post {searchParams.id}</h3>
-    <Form action={editPost} title="Editar post" post={post} />
+    <Form action={editPost} title="Editar post" post={post} >
+      {/* <TipTap contenido={post?.post} /> */}
+    </Form>
   </div>
 
   );

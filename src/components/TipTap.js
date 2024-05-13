@@ -1,56 +1,57 @@
 'use client'
 // https://tiptap.dev/docs/editor/examples/default
+// https://lucide.dev/icons/
 
-
-// EJEMPLO MUY SIMPLE
-// import { useEditor, EditorContent } from '@tiptap/react'
-// import StarterKit from '@tiptap/starter-kit'
-
-// const Tiptap = () => {
-//   const editor = useEditor({
-//     extensions: [
-//       StarterKit,
-//     ],
-//     content: '<p>Hello World! 🌎️</p>',
-//   })
-
-//   return (
-//     <EditorContent editor={editor} />
-//   )
-// }
-
-// export default Tiptap
-
-
-
-// EJEMPLO MÁS COMPLETO
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React from 'react'
+import {
+  Bold,
+  Italic,
+  Strikethrough,
+  Type,
+  WrapText,
+  List,
+  ListOrdered,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Minus,
+  Undo,
+  Redo,
+  Palette,
+  Codepen,
+  Code,
+  Quote,
+  RemoveFormatting,
+  Delete,
+  getHTML
+} from 'lucide-react'
 import { useState } from 'react'
 
 
+
+
 const MenuBar = () => {
+
   const { editor } = useCurrentEditor()
 
   if (!editor) {
     return null
   }
 
-  const [texto, setTexto] = useState(editor.getHTML())    //guardamos estado
-
-  editor.on('update', ({ editor }) => {
-    setTexto(editor.getHTML())
-  })
+  const [color, setColor] = useState('#000000')
 
   return (
     <>
-      <input type="hidden" name='post' defaultValue={texto} style={{ backgroundColor: '#ccc'}}  />
+      <input type="hidden" name='campo' defaultValue={editor.getHTML()} />  {/* Campo asociado dentro del formulario padre */}
 
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+      <Bold strokeWidth={4}
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={
           !editor.can()
@@ -59,11 +60,10 @@ const MenuBar = () => {
             .toggleBold()
             .run()
         }
-        className={editor.isActive('bold') ? 'is-active' : ''}
-      >
-        bold
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('bold') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Italic
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={
           !editor.can()
@@ -72,11 +72,10 @@ const MenuBar = () => {
             .toggleItalic()
             .run()
         }
-        className={editor.isActive('italic') ? 'is-active' : ''}
-      >
-        italic
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('italic') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Strikethrough
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={
           !editor.can()
@@ -85,106 +84,60 @@ const MenuBar = () => {
             .toggleStrike()
             .run()
         }
-        className={editor.isActive('strike') ? 'is-active' : ''}
-      >
-        strike
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={
-          !editor.can()
-            .chain()
-            .focus()
-            .toggleCode()
-            .run()
-        }
-        className={editor.isActive('code') ? 'is-active' : ''}
-      >
-        code
-      </spam >
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-        clear marks
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().clearNodes().run()}>
-        clear nodes
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('strike') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <WrapText
+        onClick={() => editor.chain().focus().setHardBreak().run()}
+        className='editor-option'
+      />
+
+      <Type
         onClick={() => editor.chain().focus().setParagraph().run()}
-        className={editor.isActive('paragraph') ? 'is-active' : ''}
-      >
-        paragraph
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('paragraph') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Heading1
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
-      >
-        h1
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('heading', { level: 1 }) ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Heading2
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
-      >
-        h2
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('heading', { level: 2 }) ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Heading3
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
-      >
-        h3
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('heading', { level: 3 }) ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Heading4
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
-      >
-        h4
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('heading', { level: 4 }) ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Heading5
         onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
-      >
-        h5
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('heading', { level: 5 }) ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Heading6
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
-      >
-        h6
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('heading', { level: 6 }) ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <List
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive('bulletList') ? 'is-active' : ''}
-      >
-        bullet list
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('bulletList') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <ListOrdered
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={editor.isActive('orderedList') ? 'is-active' : ''}
-      >
-        ordered list
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('codeBlock') ? 'is-active' : ''}
-      >
-        code block
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={editor.isActive('blockquote') ? 'is-active' : ''}
-      >
-        blockquote
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-        horizontal rule
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().setHardBreak().run()}>
-        hard break
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className={editor.isActive('orderedList') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Undo
         onClick={() => editor.chain().focus().undo().run()}
         disabled={
           !editor.can()
@@ -193,10 +146,10 @@ const MenuBar = () => {
             .undo()
             .run()
         }
-      >
-        undo
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
+        className='editor-option'
+      />
+
+      <Redo
         onClick={() => editor.chain().focus().redo().run()}
         disabled={
           !editor.can()
@@ -205,18 +158,70 @@ const MenuBar = () => {
             .redo()
             .run()
         }
-      >
-        redo
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }}
-        onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-        className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
-      >
-        purple
-      </spam>
-      <spam style={{ backgroundColor: '#ccc', padding: '0.5rem 1rem', marginRight: '0.5rem', marginBottom: '0.5rem', display: 'inline-block', borderRadius: '6px' }} onClick={() => alert(editor.getHTML())}  >
-        HTML
-      </spam>
+        className='editor-option'
+      />
+
+      <Code
+        onClick={() => editor.chain().focus().toggleCode().run()}
+        disabled={
+          !editor.can()
+            .chain()
+            .focus()
+            .toggleCode()
+            .run()
+        }
+        className={editor.isActive('code') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Codepen
+        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+        className={editor.isActive('codeBlock') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+      <Quote
+        onClick={() => editor.chain().focus().toggleBlockquote().run()}
+        className={editor.isActive('blockquote') ? 'editor-option is-active' : 'editor-option'}
+      />
+
+
+      <Minus
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        className='editor-option'
+      />
+
+      <RemoveFormatting
+        onClick={() => editor.chain().focus().unsetAllMarks().run()}
+        className='editor-option'
+      />
+
+      <Delete
+        onClick={() => editor.chain().focus().clearNodes().run()}
+        className='editor-option'
+      />
+
+      <Palette
+        id='paleta'
+        onMouseOver={e => {
+          document.getElementById('paleta').style.display = 'none';
+          document.getElementById('color').style.display = 'inline'
+          editor.chain().blur().run();
+        }}
+        className='editor-option'
+      />
+
+      <input id='color' type="color" defaultValue={color}
+        onChange={e => {
+          setColor(e.target.value);
+          editor.chain().setColor(color).run();
+        }}
+        onMouseOut={e => {
+          document.getElementById('color').style.display = 'none'
+          document.getElementById('paleta').style.display = 'inline'
+          editor.chain().focus().run();
+        }}
+        className='editor-option'
+      />
+
     </>
   )
 }
@@ -240,7 +245,6 @@ const extensions = [
 export default ({ contenido }) => {
 
   return (
-    <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={contenido}>
-    </EditorProvider>
+    <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={contenido}></EditorProvider>
   )
 }

@@ -18,7 +18,7 @@ function RegisterForm() {
                 {
                     email: data.get('email'),
                     password: data.get('password'),
-                    callbackUrl: '/dashboard'
+                    callbackUrl: '/'
                 })         
         } else {
             setTipo('error')

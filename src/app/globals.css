@@ -171,3 +171,178 @@ nav button:hover {
 .social-button:active {
   outline: solid 2px black;
 }
+
+input[type=color] {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  translate: 0 -6px
+}
+
+input[type=color]:hover {
+  translate: -1px -7px
+}
+
+/*  Estilos de la barra de menús del editor */
+.editor-option {
+  display: inline-block;
+  padding: 4px;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 4px;
+  border: solid 1px lightgray;
+}
+
+.editor-option:hover {
+  translate: -1px -1px;
+  /* margin: -1px -1px; */
+  box-shadow: 1px 1px 2px lightgray;
+}
+
+.is-active {
+  background-color: darkgray;
+  color: white;
+  border: solid 1px whitesmoke;
+}
+
+
+
+/*  Estilos del editor y su interior */
+.tiptap {
+  background-color: whitesmoke;
+  border-radius: 8px;
+  border: solid 1px lightgray;
+  padding: 20px;
+}
+
+.tiptap h1 {
+  all: unset;
+  font-size: 2.4rem;
+}
+
+.tiptap h2 {
+  all: unset;
+  font-size: 2rem;
+}
+
+.tiptap ul {
+  list-style-type: disc;
+}
+
+.tiptap ol {
+  list-style-type: decimal;
+}
+
+.tiptap blockquote::before {
+  content: '❝'
+}
+
+.tiptap blockquote::after {
+  content: '❞'
+}
+
+.tiptap p {
+  padding-top: 0;
+  margin: 0;
+}
+
+
+/* Estilos de los iconos */
+.lucide {
+  width: 16px;
+  height: 16px;
+
+}
+
+input[type=color] {
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  translate: 0 -6px
+}
+
+input[type=color]:hover {
+  translate: -1px -7px
+}
+
+/*  Estilos de la barra de menús del editor */
+.editor-option {
+  display: inline-block;
+  padding: 4px;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 4px;
+  border: solid 1px lightgray;
+}
+
+.editor-option:hover {
+  translate: -1px -1px;
+  /* margin: -1px -1px; */
+  box-shadow: 1px 1px 2px lightgray;
+}
+
+.is-active {
+  background-color: darkgray;
+  color: white;
+  border: solid 1px whitesmoke;
+}
+
+
+
+/*  Estilos del editor y su interior */
+.tiptap {
+  background-color: whitesmoke;
+  border-radius: 8px;
+  border: solid 1px lightgray;
+  padding: 20px;
+}
+
+.tiptap h1 {
+  all: unset;
+  font-size: 2.4rem;
+}
+
+.tiptap h2 {
+  all: unset;
+  font-size: 2rem;
+}
+
+.tiptap ul {
+  list-style-type: disc;
+}
+
+.tiptap ol {
+  list-style-type: decimal;
+}
+
+.tiptap blockquote::before {
+  content: '❝'
+}
+
+.tiptap blockquote::after {
+  content: '❞'
+}
+
+.tiptap p {
+  padding-top: 0;
+  margin: 0;
+}
+
+
+/* Estilos de los iconos */
+.lucide {
+  width: 30px;
+  height: 30px;
+  /* Propiedades de ejemplo: 
+  color: #ffadff;
+  width: 56px;
+  height: 56px;
+  stroke-width: 1px;
+  */
+}

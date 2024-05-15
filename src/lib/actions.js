@@ -106,6 +106,21 @@ export async function getPostsWithCategory(categoryName) {
   }
 }
 
+export async function getAllPosts() {
+  try {
+    // Consulta para obtener todos los posts
+    const posts = await prisma.posts.findMany({
+      include: { categories: true },
+    });
+
+    console.log('All Posts:', posts);
+    return posts;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
 export async function getPosts() {
   try {
     const posts = await prisma.posts.findMany()

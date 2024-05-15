@@ -11,14 +11,25 @@ async function Header() {
                 <div className="flex items-center space-x-4">
                     <img src='/logo-fs.svg' className="h-16 w-auto" alt="Logo" />
                     <div className="bg-white h-16 w-1"></div>
-                    <Link href="/" className="text-lg font-bold text-white hover:text-gray-100">
-                        Inicio
-                    </Link>
-                    <Link href="/posts" className="text-lg font-bold text-white hover:text-gray-100">
-                        Post
-                    </Link><Link href="/categorys" className="text-lg font-bold text-white hover:text-gray-100">
-                        Categorias
-                    </Link>
+                    {session ? (
+                        <>
+                            <Link href="/posts" className="text-lg font-bold text-white hover:text-gray-100">
+                                Post
+                            </Link>
+                            <Link href="/categorys" className="text-lg font-bold text-white hover:text-gray-100">
+                                Categorias
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link href="/auth/register" className="text-lg font-bold text-white hover:text-gray-100">
+                                inscribirse
+                            </Link>
+                            <Link href="/auth/login" className="text-lg font-bold text-white hover:text-gray-100">
+                                iniciar sesión
+                            </Link>
+                        </>
+                    )}
                 </div>
                 <div className="flex items-center space-x-4">
                     {session ? (
@@ -27,27 +38,11 @@ async function Header() {
                                 Desconectar
                             </button>
                         </form>
-                    ) : (
-                        <div className="flex items-center space-x-4">
-                            <Link href="/auth/register" className="text-lg font-bold text-white hover:text-gray-100">
-                                inscribirse
-                            </Link>
-                            <Link href="/auth/login" className="text-lg font-bold text-white hover:text-gray-100">
-                                iniciar sesión
-                            </Link>
-                            <Link href="/posts" className="text-lg font-bold text-white hover:text-gray-100">
-                                Post
-                            </Link><Link href="/categorys" className="text-lg font-bold text-white hover:text-gray-100">
-                                Categorias
-                            </Link>
-                        </div>
-                    )}
+                    ) : null}
                 </div>
             </div>
         </nav>
-
     )
-
 }
 
 export default Header;

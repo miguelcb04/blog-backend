@@ -37,7 +37,6 @@
 
 import { PAGE, PER_PAGE } from '@/lib/pagination';
 
-
 export async function GET(request) {
   const category = request.nextUrl.searchParams.get("category");
   const page = request.nextUrl.searchParams.get("page") || PAGE; // Obtén el número de página de la consulta, o usa 1 por defecto

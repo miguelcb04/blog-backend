@@ -1,26 +1,26 @@
-// Referencias:
-// - https://www.youtube.com/watch?v=SXmni_7B0r4
-// - https://gist.github.com/joschan21/7adf028d81a75536abcb1e98100ac661
-
+// pages/posts/index.js
 import Link from 'next/link'
 import { auth } from "@/auth"
 import Post from '@/components/Posts'
-import { getPosts, getPostsWithCategory } from '@/lib/actions'
+import { getPostsWithCategory, getAllPosts } from '@/lib/actions'
 import PaginationControls from '@/components/PaginationControls'
 import { PAGE, PER_PAGE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-export default async function Home({ searchParams }) {
- 
+export default async function PostHome({ searchParams }) {
     const session = await auth()
 
     const page = Number(searchParams['page'] ?? PAGE)
     const per_page = Number(searchParams['per_page'] ?? PER_PAGE)
     const category = searchParams['category'] ?? ''
 
-    const posts = await getPostsWithCategory(category)
-
+    let posts = []
+    if (category) {
+        posts = await getPostsWithCategory(category)
+    } else {
+        posts = await getAllPosts(page)
+    }
 
     // mocked, skipped and limited in the real app
     const start = (page - 1) * per_page // 0, 5, 10 ...
@@ -35,9 +35,9 @@ export default async function Home({ searchParams }) {
         <div>
             {session?.user?.role === 'ADMIN' && (
                 <div>
-                    <Link  className='bg-gray-300 px-4 rounded-md ' href="/posts/new"> Nuevo post </Link>
+                    <Link className='bg-gray-300 px-4 rounded-md ' href="/posts/new"> Nuevo post </Link>
                     {entries.map((post) => (
-                        <Post key={post.id} post={post} >
+                        <Post key={post.id} post={post}>
                             <Link
                                 className='bg-gray-300  px-4 rounded-md mr-2'
                                 href={{ pathname: '/posts/edit', query: { id: post.id } }}>
@@ -53,6 +53,7 @@ export default async function Home({ searchParams }) {
                 </div>
             )}
             <PaginationControls
+                currentPage={page}
                 hasNextPage={end < posts.length}
                 hasPrevPage={start > 0}
                 total={posts.length}
@@ -60,7 +61,3 @@ export default async function Home({ searchParams }) {
         </div>
     )
 }
-
-
-
-

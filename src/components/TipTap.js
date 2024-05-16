@@ -32,6 +32,7 @@ import {
   Delete,
   getHTML
 } from 'lucide-react'
+import React from 'react'
 import { useState } from 'react'
 
 
@@ -46,10 +47,15 @@ const MenuBar = () => {
   }
 
   const [color, setColor] = useState('#000000')
+  const [texto, setTexto] = useState( editor.getHTML())
+    
+    editor.on('update', ({editor}) => {
+      setTexto (editor.getHTML())
+    })
 
   return (
     <>
-      <input type="hidden" name='campo' defaultValue={editor.getHTML()} />  {/* Campo asociado dentro del formulario padre */}
+      <input type="hidden" name='post' defaultValue={texto} />  {/* Campo asociado dentro del formulario padre */}
 
       <Bold strokeWidth={4}
         onClick={() => editor.chain().focus().toggleBold().run()}

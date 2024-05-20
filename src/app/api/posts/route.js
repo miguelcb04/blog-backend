@@ -46,18 +46,18 @@ export async function GET(request) {
   if (category) {
     // Si se proporciona un parámetro de categoría, busca posts solo en esa categoría
     // http://localhost:3000/api/posts?category=desarrollo-web&page=2
-    posts = await getPostsWithCategory(category, page);
+    posts = await getPostsWithCategoryApi(category, page);
   } else {
     // Si no se proporciona un parámetro de categoría, obtener todas según la página
     // http://localhost:3000/api/posts?page=4
     // http://localhost:3000/api/posts
-     posts = await getAllPosts(page); // FALTA POR HACER
+     posts = await getAllPostsApi(page); // FALTA POR HACER
   }
 
   return Response.json(posts);
 }
 
-async function getPostsWithCategory(categoryName, page) {
+async function getPostsWithCategoryApi(categoryName, page) {
   try {
     // Calcular el índice de inicio y el número de posts a mostrar
     const startIndex = (page - 1) * PER_PAGE;
@@ -85,7 +85,7 @@ async function getPostsWithCategory(categoryName, page) {
 }
 
 
-async function getAllPosts(page) {
+async function getAllPostsApi(page) {
   try {
     // Calcular el índice de inicio y el número de posts a mostrar
     const startIndex = (page - 1) * PER_PAGE;

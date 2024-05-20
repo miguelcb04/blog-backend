@@ -1,5 +1,5 @@
 import Form from "@/components/Form2";
-import {prisma} from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { editCategory } from "@/lib/actions";
 
 export const dynamic = "force-dynamic";
@@ -23,12 +23,10 @@ async function page({ searchParams }) {
   }
 
   return (
-<div className="flex justify-center items-center ">
-  <div className="bg-white p-8 rounded-lg shadow-md text-blue-500 max-w-md w-full">
-    <h3 className="text-2xl font-bold mb-4 text-center">Editar categoria {searchParams.id}</h3>
-    <Form action={editCategory} title="Editar categoria" category={category} />
-  </div>
-</div>
+    <div >
+      <h3>Editar categoria {searchParams.id}</h3>
+      <Form action={editCategory} title="Editar categoria" category={category} />
+    </div>
 
   );
 }

@@ -1,7 +1,6 @@
 import { getPost, getCategorys } from '@/lib/actions';
 
 async function ListaCategory({ postId, disabled }) {
-
     // Variables para almacenar la categoría seleccionada y las categorías
     const categorys = await getCategorys();
    
@@ -12,24 +11,25 @@ async function ListaCategory({ postId, disabled }) {
         post = await getPost(postId)
         selectedCategorys = post.categories.map(cat => cat.id);
     }
-  console.log("select categorias" ,selectedCategorys)
 
-    console.log("categorias " , categorys);
     return (
         <fieldset disabled={disabled}>
             <legend><h1>Categorias</h1></legend>
-            {categorys.map((category) => (
-                <div key={category.id}>
-                    <p>
-                    {selectedCategorys.includes(category.id) 
-                    ? <input type='checkbox' name={category.id}  value={category.id} defaultChecked />
-                    : <input type='checkbox' name={category.id}  value={category.id} /> }
-                    {category.name}
-                    </p>
-                </div>
-            ))}
+            {categorys.map((category) => {
+                const idCat = `cat${category.id}`;
+                return (
+                    <div key={category.id}>
+                        <label htmlFor={idCat}>
+                            <input type='checkbox' id={idCat} name={category.id.toString()} value={category.id} 
+                                defaultChecked={selectedCategorys.includes(category.id)} />
+                            {category.name}
+                        </label>
+                    </div>
+                );
+            })}
         </fieldset>
     );
 }
 
 export default ListaCategory;
+

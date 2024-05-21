@@ -94,7 +94,7 @@ export async function getPostsWithCategory(categoryName) {
     let filteredPosts = posts
     // const filteredPosts = posts.filter( post => post.categories.filter( cat => cat.name.localeCompare(categoryName)==0  ).length != 0 )
     if (categoryName) {
-      filteredPosts = posts.filter(post => post.categories.filter(cat => cat.name == categoryName).length != 0)
+      filteredPosts = posts.filter(post => post.categories.filter(cat => cat.slug == categoryName).length != 0)
     } 
 
 
@@ -181,17 +181,17 @@ export async function newPost(formData) {
 }
 
 
-export async function newPostJson({ author, title, image, post, slug, views }) {
-  try {
-    const newpost = await prisma.posts.create({
-      data: { author, title, image, post, slug, views },
-    })
-    return newpost
-  } catch (error) {
-    console.log(error);
-  }
+// export async function newPostJson({ author, title, image, post, slug, views }) {
+//   try {
+//     const newpost = await prisma.posts.create({
+//       data: { author, title, image, post, slug, views },
+//     })
+//     return newpost
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-}
+// }
 
 export async function editPost(formData) {
   const id = Number(formData.get('id'))
@@ -231,20 +231,6 @@ export async function editPost(formData) {
 }
 
 
-export async function editPostJson({ postId, author, title, image, post, slug, views }) {
-  const id = Number(postId)
-  try {
-    const editpost = await prisma.posts.update({
-      where: { id },
-      data: { author, title, image, post, slug, views },
-    })
-    return editpost
-  } catch (error) {
-    console.log(error);
-  }
-
-}
-
 
 export async function deletePost(formData) {
   try {
@@ -263,24 +249,6 @@ export async function deletePost(formData) {
 
   redirect('/posts');
 }
-
-
-export async function deletePostJson(postId) {
-  const id = Number(postId)
-  try {
-
-    const post = await prisma.posts.delete({
-      where: {
-        id,
-      },
-    })
-    return post
-  } catch (error) {
-    console.log(error);
-  }
-
-}
-
 
 export async function getCategorys() {
   try {

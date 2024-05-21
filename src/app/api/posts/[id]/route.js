@@ -1,4 +1,5 @@
-import{ deletePostJson,editPostJson, getPost} from "@/lib/actions";
+import { getPost } from "@/lib/actions";
+import { deletePostJson, editPostJson } from "@/lib/actionsApi";
 
 export async function GET(request, { params }) {
     let post = await getPost(params.id);

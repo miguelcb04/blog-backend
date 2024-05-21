@@ -46,7 +46,7 @@ model Posts {
   modified   DateTime   @updatedAt
   is_draft   Boolean    @default(true)
   slug       String     @unique
-  views      Int        @default(0)
+  views      Int?      @default(0)
   categories Category[] //@relation("CategoryToPosts")
 }
 

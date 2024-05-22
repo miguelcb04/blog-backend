@@ -6,6 +6,7 @@ import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
+import { generateHTML } from '@tiptap/html'
 import StarterKit from '@tiptap/starter-kit'
 import {
   Bold,
@@ -30,7 +31,7 @@ import {
   Quote,
   RemoveFormatting,
   Delete,
-  getHTML
+  Eye
 } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
@@ -38,7 +39,7 @@ import { useState } from 'react'
 
 
 
-const MenuBar = () => {
+const MenuBar = ({ setMessage }) => {
 
   const { editor } = useCurrentEditor()
 
@@ -48,10 +49,17 @@ const MenuBar = () => {
 
   const [color, setColor] = useState('#000000')
   const [texto, setTexto] = useState( editor.getHTML())
-    
+  
+  const showMessage = () => {
+    const html = editor.getHTML()
+    setMessage(html)
+    alert(html) // Mostrar el HTML en una alerta
+  }
+
     editor.on('update', ({editor}) => {
       setTexto (editor.getHTML())
     })
+
 
   return (
     <>
@@ -227,7 +235,10 @@ const MenuBar = () => {
         }}
         className='editor-option'
       />
-
+      <Eye
+        onClick={showMessage}
+        className='editor-option'
+      />
     </>
   )
 }
@@ -249,8 +260,10 @@ const extensions = [
 
 
 export default ({ contenido }) => {
-
+  const [message, setMessage] = useState('')
   return (
-    <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={contenido}></EditorProvider>
+    <EditorProvider  slotBefore={<MenuBar setMessage={setMessage} />} extensions={extensions} content={contenido}>
+    {/* <p>{message}</p> */}
+  </EditorProvider>
   )
 }

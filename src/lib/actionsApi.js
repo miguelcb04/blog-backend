@@ -32,7 +32,7 @@ export async function deletePostJson(postId) {
   }
 }
 
-const PER_PAGE = 1; // Assuming PER_PAGE is 10, replace with the actual value if different
+const PER_PAGE = 1;
 
 export async function getPostsWithCategoryApi(categoryName, page) {
   try {

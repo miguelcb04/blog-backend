@@ -1,11 +1,7 @@
 'use server'
 
-import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
-import { signIn, signOut } from '@/auth';
-import { getUserByEmail } from '@/lib/data';
-import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
+import { PER_PAGE } from './pagination';
 
 export async function editPostJson({ postId, author, title, image, post, slug, views }) {
   const id = Number(postId);
@@ -31,8 +27,6 @@ export async function deletePostJson(postId) {
     console.log(error);
   }
 }
-
-const PER_PAGE = 1;
 
 export async function getPostsWithCategoryApi(categoryName, page) {
   try {
@@ -69,6 +63,17 @@ export async function getAllPostsApi(page) {
 
     console.log('All Posts:', posts);
     return posts;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
+export async function getTotalPostsCount() {
+  try {
+    const totalPosts = await prisma.posts.count();
+    console.log('Total Posts:', totalPosts);
+    return totalPosts;
   } catch (error) {
     console.error('Error:', error);
     return null;

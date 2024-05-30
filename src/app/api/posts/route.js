@@ -1,5 +1,5 @@
-import { PAGE } from '@/lib/pagination';
-import { getPostsWithCategoryApi, getAllPostsApi } from '@/lib/actionsApi';
+import { PAGE, PER_PAGE } from '@/lib/pagination';
+import { getPostsWithCategoryApi, getAllPostsApi, getTotalPostsCount } from '@/lib/actionsApi';
 
 export async function GET(request) {
   const url = new URL(request.url);
@@ -16,8 +16,16 @@ export async function GET(request) {
     posts = await getAllPostsApi(page);
   }
 
-  return new Response(JSON.stringify(posts), {
+  const responseBody = {
+    total_posts: await getTotalPostsCount(),
+    per_page: PER_PAGE,
+    page: page,
+    posts: posts
+  };
+
+  return new Response(JSON.stringify(responseBody), {
     headers: { 'Content-Type': 'application/json' }
   });
 }
+
 

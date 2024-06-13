@@ -23,7 +23,7 @@ async function Header() {
                     ) : (
                         <>
                             <Link href="/auth/register" className="text-lg font-bold text-white hover:text-gray-100">
-                                inscribirse
+                                registro
                             </Link>
                             <Link href="/auth/login" className="text-lg font-bold text-white hover:text-gray-100">
                                 iniciar sesión

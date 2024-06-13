@@ -25,12 +25,7 @@ export default auth((req) => {
 
 export const config = {
     matcher: [
-        "/dashboard(.*)",
-        "/admin(.*)",
-        "/clientes(.*)",
-        "/bicicletas",
-        "/bicicletas/new",
-        "/bicicletas/edit",
-        "/bicicletas/delete",
+        "/categorys(.*)",
+        "/posts(.*)"
     ],
 };
